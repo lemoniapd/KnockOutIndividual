@@ -3,11 +3,11 @@ package KnockOut.Facade;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Read {
+public class Reader {
 
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("Dice results.txt")));
 
-    public Read() throws FileNotFoundException {
+    public Reader() throws FileNotFoundException {
     }
 
     public ArrayList<String> resultListFromFile() throws IOException {

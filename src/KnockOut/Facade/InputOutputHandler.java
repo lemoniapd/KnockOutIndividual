@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class InputOutputHandler {
 
-    private final Write OUT = new Write();
-    private final Read IN = new Read();
+    private final Writer OUT = new Writer();
+    private final Reader IN = new Reader();
 
     public InputOutputHandler() throws IOException {
     }
@@ -17,5 +17,9 @@ public class InputOutputHandler {
 
     public ArrayList<String> resultListFromFile() throws IOException {
         return IN.resultListFromFile();
+    }
+
+    public void clearResultFile(){
+        OUT.clearResultFile();
     }
 }

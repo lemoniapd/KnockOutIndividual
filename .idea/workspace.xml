@@ -1,34 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8838cae3-dece-4a39-b4df-86ebd61e0042" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dice results.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KnockOutIndividual.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/Dice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/Facade/InputOutputHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/Facade/Read.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/Facade/Write.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/PinkDice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/YellowDice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/pinkDicePictures/dice1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/pinkDicePictures/dice2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/pinkDicePictures/dice3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/pinkDicePictures/dice4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/pinkDicePictures/dice5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/pinkDicePictures/dice6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/yellowDicePictures/dice1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/yellowDicePictures/dice2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/yellowDicePictures/dice3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/yellowDicePictures/dice4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/yellowDicePictures/dice5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/KnockOut/bilder/yellowDicePictures/dice6.png" afterDir="false" />
+    <list default="true" id="8838cae3-dece-4a39-b4df-86ebd61e0042" name="Changes" comment="added option to play again and also to clear scoreboard">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dice results.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Dice results.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KnockOut/Facade/InputOutputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KnockOut/Facade/InputOutputHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KnockOut/Facade/Read.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KnockOut/Facade/Reader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KnockOut/Facade/Write.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KnockOut/Facade/Writer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KnockOut/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KnockOut/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KnockOut/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KnockOut/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,14 +29,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/lemoniapalmqvist/IdeaProjects/KnockOutIndividual/src"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/lemoniapalmqvist/IdeaProjects/KnockOutIndividual/src&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -90,8 +70,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1671443418187</updated>
-      <workItem from="1671443420479" duration="1047000" />
+      <workItem from="1671443420479" duration="1445000" />
+      <workItem from="1671468115409" duration="3719000" />
     </task>
+    <task id="LOCAL−00001" summary="Initial commit for individual add ons">
+      <created>1671445411503</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1671445411503</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,5 +95,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit for individual add ons" />
+    <MESSAGE value="added option to play again and also to clear scoreboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="added option to play again and also to clear scoreboard" />
   </component>
 </project>

@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Game extends JFrame implements ActionListener{
-
+public class Game extends JFrame implements ActionListener {
     private final int NUMBER_OF_DICE = 2;
     private int currentTotal;
     private int knockOutNumber;
@@ -20,7 +19,6 @@ public class Game extends JFrame implements ActionListener{
     PinkDice dice1 = new PinkDice();
     YellowDice dice2 = new YellowDice();
     InputOutputHandler inputOutputHandler = new InputOutputHandler();
-
     JPanel basePanel = new JPanel();
     JPanel topHalf = new JPanel();
     JPanel bottomHalf = new JPanel();
@@ -30,9 +28,11 @@ public class Game extends JFrame implements ActionListener{
     JLabel pointsLabel = new JLabel("Poäng: ");
     JLabel koNumber = new JLabel("KnockOut-nummer: " + knockOutNumber);
     JButton throwDice = new JButton("Kasta tärningar");
-    JLabel highscore1 =  new JLabel();
-    JLabel highscore2 =  new JLabel();
-    JLabel highscore3 =  new JLabel();
+    JButton playAgain = new JButton("Spela igen");
+    JButton clearScoreboard = new JButton("Rensa topplista");
+    JLabel highscore1 = new JLabel();
+    JLabel highscore2 = new JLabel();
+    JLabel highscore3 = new JLabel();
 
 
     public Game(String name, int knockoutNumber) throws IOException {
@@ -40,14 +40,16 @@ public class Game extends JFrame implements ActionListener{
         basePanel.setLayout(new BorderLayout());
         basePanel.add(topHalf, BorderLayout.NORTH);
         basePanel.add(bottomHalf, BorderLayout.SOUTH);
-        topHalf.setLayout(new GridLayout(4,1));
+        topHalf.setLayout(new GridLayout(4, 1));
         topHalf.add(title);
         topHalf.add(koNumber);
         topHalf.add(pointsLabel);
         topHalf.add(throwDice);
         throwDice.addActionListener(this);
+        playAgain.addActionListener(this);
+        clearScoreboard.addActionListener(this);
         title.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        bottomHalf.setLayout(new GridLayout(1,2));
+        bottomHalf.setLayout(new GridLayout(1, 2));
         bottomHalf.add(die1);
         bottomHalf.add(die2);
         pack();
@@ -69,7 +71,7 @@ public class Game extends JFrame implements ActionListener{
         return currentTotal == knockOutNumber;
     }
 
-    public ArrayList<String> scoreBoardList (ArrayList<String> resultList){
+    public ArrayList<String> scoreBoardList(ArrayList<String> resultList) {
         ArrayList<Integer> scores = new ArrayList<>();
         for (String result : resultList) {
             scores.add(Integer.parseInt(result.substring(0, result.indexOf(' '))));
@@ -86,6 +88,25 @@ public class Game extends JFrame implements ActionListener{
         }
         return sortedResults;
     }
+
+    public void setHighscores(ArrayList<String> highscores) {
+        if (highscores.size() > 0) {
+            highscore1.setText(highscores.get(0));
+        }
+        if (highscores.size() > 1) {
+            highscore2.setText(highscores.get(1));
+        }
+        if (highscores.size() > 2) {
+            highscore3.setText(highscores.get(2));
+        }
+        topHalf.add(highscore1);
+        topHalf.add(highscore2);
+        topHalf.add(highscore3);
+        revalidate();
+        repaint();
+    }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -104,27 +125,23 @@ public class Game extends JFrame implements ActionListener{
                 topHalf.remove(pointsLabel);
                 bottomHalf.remove(die1);
                 bottomHalf.remove(die2);
-                try {
-                    ArrayList<String> highscores = scoreBoardList(inputOutputHandler.resultListFromFile());
-                    highscore1.setText(highscores.get(0));
-                    highscore2.setText(highscores.get(1));
-                    highscore3.setText(highscores.get(2));
-                    topHalf.add(highscore1);
-                    topHalf.add(highscore2);
-                    topHalf.add(highscore3);
-                    revalidate();
-                    repaint();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
+                bottomHalf.add(playAgain);
+                bottomHalf.add(clearScoreboard);
                 try {
                     inputOutputHandler.writeResultsToFile(points + " poäng, " + name);
-                    inputOutputHandler.resultListFromFile();
+                    setHighscores(scoreBoardList(inputOutputHandler.resultListFromFile()));
+                    //inputOutputHandler.resultListFromFile();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
+        } else if (e.getSource() == clearScoreboard) {
+            inputOutputHandler.clearResultFile();
+        } else if (e.getSource() == playAgain) {
+            setVisible(false);
+            revalidate();
+            repaint();
+            new Main();
         }
     }
 }

@@ -5,9 +5,10 @@ import java.util.ArrayList;
 
 public class Reader {
 
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("Dice results.txt")));
+    BufferedReader bufferedReader;
 
     public Reader() throws FileNotFoundException {
+        bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("Dice results.txt")));
     }
 
     public ArrayList<String> resultListFromFile() throws IOException {

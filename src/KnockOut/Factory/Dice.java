@@ -1,4 +1,4 @@
-package KnockOut;
+package KnockOut.Factory;
 
 import javax.swing.*;
 import java.util.Random;
@@ -15,5 +15,7 @@ public abstract class Dice extends JFrame {
         currentNumber = random.nextInt(1, 7);
     }
 
-
+    public ImageIcon getImage() {
+        return null;
+    }
 }

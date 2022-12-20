@@ -1,2 +1,5 @@
 1 poäng, L"
 2 poäng, L#
+3 poäng, l666
+1 poäng, debugTestL666
+10 poäng, LLL

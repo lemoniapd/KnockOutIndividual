@@ -1,6 +1,7 @@
 package KnockOut;
 
 import KnockOut.Facade.InputOutputHandler;
+import KnockOut.Factory.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,20 +12,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game extends JFrame implements ActionListener {
-    private final int NUMBER_OF_DICE = 2;
     private int currentTotal;
     private int knockOutNumber;
     private String name;
     private int points = 0;
-    PinkDice dice1 = new PinkDice();
-    YellowDice dice2 = new YellowDice();
+    private int numberOfDice;
     InputOutputHandler inputOutputHandler = new InputOutputHandler();
+    DiceFactory diceFactory = new DiceFactory();
+    ArrayList<Dice> listOfDice = new ArrayList<>();
+    ArrayList<JLabel> listOfDiceLabels = new ArrayList<>();
     JPanel basePanel = new JPanel();
     JPanel topHalf = new JPanel();
     JPanel bottomHalf = new JPanel();
     JLabel title = new JLabel("KnockOut!");
-    JLabel die1 = new JLabel(dice1.getImage());
-    JLabel die2 = new JLabel(dice2.getImage());
     JLabel pointsLabel = new JLabel("Poäng: ");
     JLabel koNumber = new JLabel("KnockOut-nummer: " + knockOutNumber);
     JButton throwDice = new JButton("Kasta tärningar");
@@ -34,8 +34,10 @@ public class Game extends JFrame implements ActionListener {
     JLabel highscore2 = new JLabel();
     JLabel highscore3 = new JLabel();
 
-
-    public Game(String name, int knockoutNumber) throws IOException {
+    public Game(String name, int numberOfDice, int knockoutNumber) throws IOException {
+        this.numberOfDice = numberOfDice;
+        this.name = name;
+        this.knockOutNumber = knockoutNumber;
         this.add(basePanel);
         basePanel.setLayout(new BorderLayout());
         basePanel.add(topHalf, BorderLayout.NORTH);
@@ -49,26 +51,41 @@ public class Game extends JFrame implements ActionListener {
         playAgain.addActionListener(this);
         clearScoreboard.addActionListener(this);
         title.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        bottomHalf.setLayout(new GridLayout(1, 2));
-        bottomHalf.add(die1);
-        bottomHalf.add(die2);
+        bottomHalf.setLayout(new GridLayout(3, 2));
+        populateListsOfDiceAndLabels(numberOfDice);
+        for (JLabel labels : listOfDiceLabels) {
+            bottomHalf.add(labels);
+        }
         pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        if (knockoutNumber < NUMBER_OF_DICE || knockoutNumber > 6 * NUMBER_OF_DICE) {
+        if (knockoutNumber < numberOfDice || knockoutNumber > 6 * numberOfDice) {
             JOptionPane.showMessageDialog(null, "KnockOut-nummer måste vara mellan "
-                    + NUMBER_OF_DICE + "-" + NUMBER_OF_DICE * 6 + "!");
+                    + numberOfDice + "-" + numberOfDice * 6 + "!");
             throw new IllegalArgumentException();
         }
-        this.name = name;
-        this.knockOutNumber = knockoutNumber;
+
         koNumber.setText("KnockOut-nummer: " + knockoutNumber);
     }
 
     public boolean gameLost() {
         return currentTotal == knockOutNumber;
+    }
+
+    public void populateListsOfDiceAndLabels(int numberOfDice) {
+        int toggle = 0;
+        for (int i = 0; i < numberOfDice; i++) {
+            if (toggle == 0) {
+                listOfDice.add(diceFactory.getDie(DiceEnum.YELLOW_DICE));
+                toggle = 1;
+            } else {
+                listOfDice.add(diceFactory.getDie(DiceEnum.PINK_DICE));
+                toggle = 0;
+            }
+            listOfDiceLabels.add(new JLabel(listOfDice.get(i).getImage()));
+        }
     }
 
     public ArrayList<String> scoreBoardList(ArrayList<String> resultList) {
@@ -106,16 +123,19 @@ public class Game extends JFrame implements ActionListener {
         repaint();
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == throwDice && !gameLost()) {
-            dice1.throwDice();
-            die1.setIcon(dice1.getImage());
-            dice2.throwDice();
-            die2.setIcon(dice2.getImage());
-            currentTotal = dice1.getCurrentNumber() + dice2.getCurrentNumber();
+            for (Dice element : listOfDice) {
+                element.throwDice();
+            }
+            for (int i = 0; i < listOfDiceLabels.size(); i++) {
+                listOfDiceLabels.get(i).setIcon(listOfDice.get(i).getImage());
+            }
+            for (Dice element : listOfDice) {
+                currentTotal += element.getCurrentNumber();
+            }
+            //currentTotal = dice1.getCurrentNumber() + dice2.getCurrentNumber();
             points++;
             pointsLabel.setText("Poäng: " + points);
             if (gameLost()) {
@@ -123,14 +143,14 @@ public class Game extends JFrame implements ActionListener {
                 topHalf.remove(throwDice);
                 topHalf.remove(koNumber);
                 topHalf.remove(pointsLabel);
-                bottomHalf.remove(die1);
-                bottomHalf.remove(die2);
+                for (JLabel labels : listOfDiceLabels) {
+                    bottomHalf.remove(labels);
+                }
                 bottomHalf.add(playAgain);
                 bottomHalf.add(clearScoreboard);
                 try {
                     inputOutputHandler.writeResultsToFile(points + " poäng, " + name);
                     setHighscores(scoreBoardList(inputOutputHandler.resultListFromFile()));
-                    //inputOutputHandler.resultListFromFile();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -143,5 +163,6 @@ public class Game extends JFrame implements ActionListener {
             repaint();
             new Main();
         }
+        currentTotal = 0;
     }
 }

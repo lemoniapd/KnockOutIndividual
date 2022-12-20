@@ -1,8 +1,8 @@
-package KnockOut;
+package KnockOut.Factory;
 
 import javax.swing.*;
 
-public class YellowDice extends Dice{
+public class YellowDice extends Dice {
 
     private ImageIcon yellowImage1 = new ImageIcon("src/KnockOut/bilder/yellowDicePictures/dice1.png");
     private ImageIcon yellowImage2 = new ImageIcon("src/KnockOut/bilder/yellowDicePictures/dice2.png");
@@ -12,6 +12,7 @@ public class YellowDice extends Dice{
     private ImageIcon yellowImage6 = new ImageIcon("src/KnockOut/bilder/yellowDicePictures/dice6.png");
     private ImageIcon[] yellowDieFaces = {yellowImage1, yellowImage2, yellowImage3, yellowImage4, yellowImage5, yellowImage6};
 
+    @Override
     public ImageIcon getImage() {
         return yellowDieFaces[currentNumber - 1];
     }
